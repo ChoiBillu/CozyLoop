@@ -747,44 +747,43 @@
   <script>
     // 🏷 Product Database with Warm Crochet Aesthetic Placeholder Images
     const products = [
-      {
-        id: "daisy-ring",
-        name: "Daisy Flower Ring",
-        image: "Pictures\\Diasy Rin.jpg",
-        badges: ["🤏 Pocket Sized", "✨ Made To Order", "🌸 Cute Alert"],
-        price: 250,
-        time: "1–2 Days",
-        desc: "A tiny blooming flower ring designed specifically to keep your hand looking cute while doing absolutely nothing."
-      },
-      {
-        id: "chonky-duck",
-        name: "Chonky Duck Companion",
-        image:"Pictures\\Chonky Duckie.jpg",
-        badges: ["💖 Fan Favorite", "🧶 Handmade", "🐥 Certified Adorable"],
-        price: 450,
-        time: "2–3 Days",
-        desc: "An absolutely rounded, chonky duck that sits gracefully on your desk judge-free as you stare blankly at your monitor."
-      },
-      {
-        id: "Angry-Pin",
-        name: "Angy Pin",
-        image: "Pictures\\angy pin.jpeg",
-        badges: ["🎀 Kaleshi Expression", "✨ Premium Soft"],
-        price: 400,
-        time: "1–2 Days",
-        desc: "idk abhi nhi socha"
-      },
-      {
-        id: "strawberry-charm",
-        name: "Strawberry Bag Charm",
-        image: "Pictures\\strobery charm.webp",
-        badges: ["🌸 Tiny Treasure", "🧶 Freshly Crafted"],
-        price: 350,
-        time: "2 Days",
-        desc: "A plump, sweet, bright strawberry ready to dangle from your everyday canvas tote bag."
-      }
-    ];
-
+  {
+    id: "daisy-ring",
+    name: "Daisy Flower Ring",
+    image: "/pictures/diasy-rin.jpg",
+    badges: ["🤏 Pocket Sized", "✨ Made To Order", "🌸 Cute Alert"],
+    price: 250,
+    time: "1–2 Days",
+    desc: "A tiny blooming flower ring designed specifically to keep your hand looking cute while doing absolutely nothing."
+  },
+  {
+    id: "chonky-duck",
+    name: "Chonky Duck Companion",
+    image: "/pictures/chonky-duckie.jpg",
+    badges: ["💖 Fan Favorite", "🧶 Handmade", "🐥 Certified Adorable"],
+    price: 450,
+    time: "2–3 Days",
+    desc: "An absolutely rounded, chonky duck that sits gracefully on your desk judge-free as you stare blankly at your monitor."
+  },
+  {
+    id: "angry-pin",
+    name: "Angy Pin",
+    image: "/pictures/angy-pin.jpeg",
+    badges: ["🎀 Kaleshi Expression", "✨ Premium Soft"],
+    price: 400,
+    time: "1–2 Days",
+    desc: "idk abhi nhi socha"
+  },
+  {
+    id: "strawberry-charm",
+    name: "Strawberry Bag Charm",
+    image: "/pictures/strobery-charm.webp",
+    badges: ["🌸 Tiny Treasure", "🧶 Freshly Crafted"],
+    price: 350,
+    time: "2 Days",
+    desc: "A plump, sweet, bright strawberry ready to dangle from your everyday canvas tote bag."
+  }
+];
     // 💭 Gen-Z Thoughts Database
     const thoughts = [
       "Respectfully... your tote bag needs a tiny duck charm.",
@@ -810,7 +809,7 @@
           <!-- FRONT SIDE -->
           <div class="card-front">
             <div class="product-img-container">
-              <img src="${product.image}" class="product-img" alt="${product.name}" />
+              <img src="angy-pin.jpeg" alt="${product.name}" class="product-img" />
             </div>
             <div class="badge-row">
               ${product.badges.map(b => `<span class="micro-badge">${b}</span>`).join('')}
