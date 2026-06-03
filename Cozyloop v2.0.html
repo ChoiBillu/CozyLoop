@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cozy Loops — Tiny Treasures</title>
+  
+  <!-- Playful & Cozy Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+
+  <style>
+    /* 🌈 CSS Variables & Theme Setup */
+    :root {
+      --lime-cream: #d8e8bc;
+      --purple-jasper: #99758f;
+      --spa-retreat: #C1E1DC;
+      --pink-tulle: #efc9e1;
+      --site-bg: #FCF9F6;
+      
+      --font-display: 'Fredoka', sans-serif;
+      --font-body: 'Nunito', sans-serif;
+      --border-radius-lg: 28px;
+      --border-radius-md: 18px;
+      --border-style: 3px solid var(--purple-jasper);
+      --shadow-playful: 4px 4px 0px 0px var(--purple-jasper);
+      --shadow-hover: 8px 8px 0px 0px var(--purple-jasper);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--site-bg);
+      color: var(--purple-jasper);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      font-weight: 700;
+    }
+
+    /* 🧶 Yarn Texture Overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 999;
+      background-image: radial-gradient(circle, var(--purple-jasper) 10%, transparent 11%), 
+                        radial-gradient(circle, var(--purple-jasper) 10%, transparent 11%);
+      background-size: 12px 12px;
+      background-position: 0 0, 6px 6px;
+    }
+
+    /* 🧭 Navigation */
+    .nav-container {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    .navbar {
+      background: rgba(252, 249, 246, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: var(--border-style);
+      border-radius: 50px;
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-playful);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-decoration: none;
+      color: var(--purple-jasper);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .nav-link {
+      font-family: var(--font-display);
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--purple-jasper);
+      font-size: 0.95rem;
+      padding: 6px 12px;
+      border-radius: 20px;
+      transition: background-color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      background-color: var(--spa-retreat);
+    }
+
+    /* 🧶 Hero Section */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 120px 20px 60px;
+      position: relative;
+      overflow: hidden;
+      background-color: var(--lime-cream);
+      border-bottom: var(--border-style);
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .hero-card {
+      background: var(--site-bg);
+      border: var(--border-style);
+      border-radius: var(--border-radius-lg);
+      padding: 40px 30px;
+      max-width: 650px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-playful);
+      position: relative;
+      z-index: 5;
+      transform: rotate(-1deg);
+      transition: transform 0.3s ease;
+    }
+
+    .hero-card:hover {
+      transform: rotate(1deg) scale(1.02);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background-color: var(--pink-tulle);
+      border: var(--border-style);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+      transform: rotate(-3deg);
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--purple-jasper);
+      text-decoration: underline wavy var(--pink-tulle);
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--purple-jasper);
+      margin-bottom: 30px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background-color: var(--spa-retreat);
+      border: var(--border-style);
+      border-radius: 50px;
+      padding: 14px 28px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--purple-jasper);
+      text-decoration: none;
+      box-shadow: var(--shadow-playful);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      background-color: var(--pink-tulle);
+    }
+
+    /* 🎈 Floating Elements */
+    .floating-item {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+      filter: drop-shadow(3px 3px 0px var(--purple-jasper));
+      animation: float 6s ease-in-out infinite alternate;
+    }
+
+    .float-1 { top: 15%; left: 10%; width: 60px; animation-delay: 0s; }
+    .float-2 { top: 20%; right: 12%; width: 50px; animation-delay: 1.5s; }
+    .float-3 { bottom: 15%; left: 15%; width: 55px; animation-delay: 0.8s; }
+    .float-4 { bottom: 20%; right: 10%; width: 65px; animation-delay: 2.2s; }
+    .float-5 { top: 45%; left: 5%; width: 45px; animation-delay: 1.2s; }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-20px) rotate(15deg);
+      }
+    }
+
+    /* 🗂 Tiny Treasures Grid */
+    .catalog-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+
+    .catalog-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .catalog-title {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+
+    /* 🎴 3D Product Flip Card */
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 32px;
+    }
+
+    .product-wrapper {
+      perspective: 1000px;
+      height: 440px; /* Slight height increase to host images cleanly */
+    }
+
+    .product-card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .product-wrapper.is-flipped .product-card {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border: var(--border-style);
+      border-radius: var(--border-radius-lg);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-playful);
+      background-color: var(--site-bg);
+    }
+
+    /* Front Customization */
+    .card-front {
+      justify-content: space-between;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .product-wrapper:hover .card-front {
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* Image container modified for actual image placement */
+    .product-img-container {
+      background-color: var(--spa-retreat);
+      border: var(--border-style);
+      border-radius: var(--border-radius-md);
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Updated styling for image rendering and scaling */
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      user-select: none;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .product-wrapper:hover .product-img {
+      transform: scale(1.1) rotate(2deg);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .micro-badge {
+      background-color: var(--site-bg);
+      border: 2px solid var(--purple-jasper);
+      border-radius: 50px;
+      padding: 2px 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      font-family: var(--font-display);
+    }
+
+    .product-info {
+      margin-top: 14px;
+    }
+
+    .product-title {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .price-reveal-btn {
+      width: 100%;
+      background-color: var(--lime-cream);
+      border: var(--border-style);
+      border-radius: 50px;
+      padding: 10px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--purple-jasper);
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .price-reveal-btn:hover {
+      background-color: var(--pink-tulle);
+      transform: translateY(-2px);
+    }
+
+    /* Back Customization */
+    .card-back {
+      transform: rotateY(180deg);
+      background-color: var(--pink-tulle);
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+    }
+
+    .back-content {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+
+    .back-price {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .back-meta {
+      font-size: 0.95rem;
+      font-weight: 700;
+      background-color: var(--site-bg);
+      border: var(--border-style);
+      border-radius: var(--border-radius-md);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 180px;
+    }
+
+    .back-btn-row {
+      width: 100%;
+      display: flex;
+      gap: 8px;
+    }
+
+    .action-btn {
+      flex: 1;
+      background-color: var(--site-bg);
+      border: var(--border-style);
+      border-radius: 50px;
+      padding: 10px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--purple-jasper);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .action-btn.secondary {
+      background-color: var(--lime-cream);
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      background-color: var(--spa-retreat);
+    }
+
+    /* 📱 Bottom Sheet Design Detail Experience */
+    .bottom-sheet-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(135, 110, 136, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .bottom-sheet-backdrop.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .bottom-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 100%);
+      width: 100%;
+      max-width: 550px;
+      background-color: var(--site-bg);
+      border-top: var(--border-style);
+      border-left: var(--border-style);
+      border-right: var(--border-style);
+      border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+      z-index: 201;
+      padding: 30px 24px 40px;
+      box-shadow: 0px -10px 40px rgba(135, 110, 136, 0.15);
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .bottom-sheet.is-active {
+      transform: translate(-50%, 0);
+    }
+
+    .sheet-handle {
+      width: 60px;
+      height: 6px;
+      background-color: var(--purple-jasper);
+      border-radius: 3px;
+      margin: -15px auto 25px;
+      opacity: 0.5;
+    }
+
+    .sheet-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sheet-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .sheet-title {
+      font-size: 1.8rem;
+    }
+
+    .sheet-close-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--purple-jasper);
+    }
+
+    /* Modal Gallery Styles updated for Images */
+    .sheet-gallery {
+      background-color: var(--lime-cream);
+      border: var(--border-style);
+      border-radius: var(--border-radius-md);
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .sheet-gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .sheet-details p {
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+
+    /* 💬 Playful Order Buttons */
+    .ordering-channels {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .order-channel-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      padding: 14px;
+      border-radius: 50px;
+      border: var(--border-style);
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--purple-jasper);
+      box-shadow: var(--shadow-playful);
+      transition: all 0.2s ease;
+    }
+
+    .order-channel-btn.whatsapp {
+      background-color: #D2F2D4;
+    }
+
+    .order-channel-btn.instagram {
+      background-color: var(--pink-tulle);
+    }
+
+    .order-channel-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* ✨ Random Thoughts Widget */
+    .random-widget {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 90;
+    }
+
+    .random-bubble {
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      background-color: var(--site-bg);
+      border: var(--border-style);
+      border-radius: var(--border-radius-md);
+      padding: 14px;
+      width: 230px;
+      box-shadow: var(--shadow-playful);
+      font-size: 0.9rem;
+      font-weight: 600;
+      opacity: 0;
+      transform: scale(0.8) translateY(10px);
+      transform-origin: bottom right;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .random-bubble.is-active {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      pointer-events: auto;
+    }
+
+    .random-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background-color: var(--pink-tulle);
+      border: var(--border-style);
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-playful);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .random-btn:hover {
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* Footer Details */
+    .footer {
+      background-color: var(--lime-cream);
+      border-top: var(--border-style);
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .catalog-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🧭 Frosted Navigation -->
+  <div class="nav-container">
+    <nav class="navbar" id="mainNavbar">
+      <a href="#" class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-flower-2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10a3 3 0 0 0-3-3h-4v4a3 3 0 0 0 7 0Z"/><path d="M5 10a3 3 0 0 1 3-3h4v4a3 3 0 0 1-7 0Z"/><path d="M12 22a3 3 0 0 0 3-3v-4h-6v4a3 3 0 0 0 3 3Z"/><circle cx="12" cy="12" r="1"/></svg>
+        Cozy Loops
+      </a>
+      <div class="nav-links">
+        <a href="#catalog" class="nav-link">Catalog</a>
+        <a href="#" class="nav-link" onclick="openThought()">Random Thoughts</a>
+      </div>
+    </nav>
+  </div>
+
+  <!-- 🧶 Giant Meme-Style Hero Section -->
+  <section class="hero-section" id="hero">
+    <!-- Floating SVGs/Details (Duck, Flower, Yarn Ball placeholders) -->
+    <div class="floating-item float-1">🐥</div>
+    <div class="floating-item float-2">🌸</div>
+    <div class="floating-item float-3">🧶</div>
+    <div class="floating-item float-4">⭐</div>
+    <div class="floating-item float-5">🎀</div>
+
+    <div class="hero-card">
+      <div class="hero-badge">🧶 Tiny Crochet Detector</div>
+      <h1 class="hero-title">
+        POV: You wanted <em>to save money</em> but then you saw this duck.
+      </h1>
+      <p class="hero-subtitle">
+        Financial stability? Never heard of her. Pocket-sized handmade emotional support companions starting at Rs. 250.
+      </p>
+      <a href="#catalog" class="hero-cta">
+        Take a Peak 👀
+      </a>
+    </div>
+  </section>
+
+  <!-- 🗂 Catalog Grid Section -->
+  <section class="catalog-section" id="catalog">
+    <div class="catalog-header">
+      <h2 class="catalog-title">Tiny Treasures Tray 🍯</h2>
+      <p>Click "What's the damage? 💸" to reveal prices and spill details.</p>
+    </div>
+
+    <div class="catalog-grid" id="catalogGrid">
+      <!-- Generated via JS for flexibility -->
+    </div>
+  </section>
+
+  <!-- 📱 Bottom Sheet Detail Modal -->
+  <div class="bottom-sheet-backdrop" id="sheetBackdrop" onclick="closeSheet()"></div>
+  <div class="bottom-sheet" id="detailSheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-layout">
+      <div class="sheet-header">
+        <h3 class="sheet-title" id="sheetTitle">Item Name</h3>
+        <button class="sheet-close-btn" onclick="closeSheet()">✕</button>
+      </div>
+      <div class="sheet-gallery" id="sheetGallery">
+        <!-- Rendered with product image -->
+      </div>
+      <div class="sheet-details">
+        <div class="badge-row" id="sheetBadges" style="margin-bottom: 12px;"></div>
+        <p id="sheetDesc">Beautifully handcrafted premium companion.</p>
+        <p><strong>⏳ Production Timeline:</strong> <span id="sheetTime">1-2 Days</span></p>
+        <p><strong>💸 Damage:</strong> <span id="sheetPrice">Rs. 0</span></p>
+      </div>
+
+      <div class="ordering-channels">
+        <a href="#" target="_blank" class="order-channel-btn whatsapp" id="waOrderBtn">
+          💬 Order via WhatsApp
+        </a>
+        <a href="#" target="_blank" class="order-channel-btn instagram" id="igOrderBtn">
+          📸 Order via Instagram
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✨ Floating Dynamic Thoughts Trigger -->
+  <div class="random-widget">
+    <div class="random-bubble" id="thoughtBubble">
+      "Respectfully... your tote bag needs a tiny duck charm."
+    </div>
+    <button class="random-btn" onclick="toggleThought()" title="Spill tea 🍵">💭</button>
+  </div>
+
+  <!-- 🌸 Humorous Footer -->
+  <footer class="footer">
+    <p class="footer-text">Made with lots of cozy loops and high-quality yarn. © 2026 Cozy Loops.</p>
+  </footer>
+
+  <script>
+    // 🏷 Product Database with Warm Crochet Aesthetic Placeholder Images
+    const products = [
+      {
+        id: "daisy-ring",
+        name: "Daisy Flower Ring",
+        image: "Pictures\\Diasy Rin.jpg",
+        badges: ["🤏 Pocket Sized", "✨ Made To Order", "🌸 Cute Alert"],
+        price: 250,
+        time: "1–2 Days",
+        desc: "A tiny blooming flower ring designed specifically to keep your hand looking cute while doing absolutely nothing."
+      },
+      {
+        id: "chonky-duck",
+        name: "Chonky Duck Companion",
+        image:"Pictures\\Chonky Duckie.jpg",
+        badges: ["💖 Fan Favorite", "🧶 Handmade", "🐥 Certified Adorable"],
+        price: 450,
+        time: "2–3 Days",
+        desc: "An absolutely rounded, chonky duck that sits gracefully on your desk judge-free as you stare blankly at your monitor."
+      },
+      {
+        id: "Angry-Pin",
+        name: "Angy Pin",
+        image: "Pictures\\angy pin.jpeg",
+        badges: ["🎀 Kaleshi Expression", "✨ Premium Soft"],
+        price: 400,
+        time: "1–2 Days",
+        desc: "idk abhi nhi socha"
+      },
+      {
+        id: "strawberry-charm",
+        name: "Strawberry Bag Charm",
+        image: "Pictures\strobery charm.webp",
+        badges: ["🌸 Tiny Treasure", "🧶 Freshly Crafted"],
+        price: 350,
+        time: "2 Days",
+        desc: "A plump, sweet, bright strawberry ready to dangle from your everyday canvas tote bag."
+      }
+    ];
+
+    // 💭 Gen-Z Thoughts Database
+    const thoughts = [
+      "Respectfully... your tote bag needs a tiny duck charm.",
+      "One more keychain won't hurt, we promise.",
+      "You came here for a ring. We both know you're leaving with three.",
+      "This purchase is purely between you and your bank account.",
+      "Self-care is buying tiny handmade accessories at 2 AM.",
+      "Your keys look incredibly lonely without a strawberry charm."
+    ];
+
+    let currentSelectedProduct = null;
+
+    // 🔨 Inject Catalog Grid Items
+    const catalogGrid = document.getElementById('catalogGrid');
+    
+    products.forEach((product, index) => {
+      const cardWrapper = document.createElement('div');
+      cardWrapper.className = 'product-wrapper';
+      cardWrapper.id = `wrapper-${product.id}`;
+      
+      cardWrapper.innerHTML = `
+        <div class="product-card">
+          <!-- FRONT SIDE -->
+          <div class="card-front">
+            <div class="product-img-container">
+              <img src="${product.image}" class="product-img" alt="${product.name}" />
+            </div>
+            <div class="badge-row">
+              ${product.badges.map(b => `<span class="micro-badge">${b}</span>`).join('')}
+            </div>
+            <div class="product-info">
+              <h3 class="product-title" title="${product.name}">${product.name}</h3>
+              <button class="price-reveal-btn" onclick="flipCard(event, '${product.id}')">
+                What's the damage? 💸
+              </button>
+            </div>
+          </div>
+          <!-- BACK SIDE (FLIPPED) -->
+          <div class="card-back">
+            <div class="back-content">
+              <div class="back-price">Rs. ${product.price}</div>
+              <div class="back-meta">
+                <span>🧶 Crafted Fresh</span>
+                <span>⏳ ${product.time}</span>
+              </div>
+            </div>
+            <div class="back-btn-row">
+              <button class="action-btn secondary" onclick="unflipCard(event, '${product.id}')">Back ↩</button>
+              <button class="action-btn" onclick="openSheet('${product.id}')">Spill Details 👀</button>
+            </div>
+          </div>
+        </div>
+      `;
+      catalogGrid.appendChild(cardWrapper);
+    });
+
+    // 🔄 Card Flip Actions
+    function flipCard(event, id) {
+      event.stopPropagation();
+      document.getElementById(`wrapper-${id}`).classList.add('is-flipped');
+    }
+
+    function unflipCard(event, id) {
+      event.stopPropagation();
+      document.getElementById(`wrapper-${id}`).classList.remove('is-flipped');
+    }
+
+    // 📱 Bottom Sheet Management
+    const sheetBackdrop = document.getElementById('sheetBackdrop');
+    const detailSheet = document.getElementById('detailSheet');
+
+    function openSheet(id) {
+      const product = products.find(p => p.id === id);
+      if (!product) return;
+      
+      currentSelectedProduct = product;
+
+      // Populate sheet content
+      document.getElementById('sheetTitle').innerText = product.name;
+      document.getElementById('sheetGallery').innerHTML = `<img src="${product.image}" alt="${product.name}" />`;
+      document.getElementById('sheetDesc').innerText = product.desc;
+      document.getElementById('sheetTime').innerText = product.time;
+      document.getElementById('sheetPrice').innerText = `Rs. ${product.price}`;
+
+      const badgeRow = document.getElementById('sheetBadges');
+      badgeRow.innerHTML = product.badges.map(b => `<span class="micro-badge">${b}</span>`).join('');
+
+      // Build Order Template Messages
+      const waMessage = encodeURIComponent(
+        `Hey Cozy Loops!\n\nI need this 😭\n\nProduct: ${product.name}\nPrice: Rs. ${product.price}\n\nCan you show me available colors?`
+      );
+      const igMessage = encodeURIComponent(
+        `Hey! I saw the ${product.name} and now I'm emotionally attached. Can I order one?`
+      );
+
+      // Default redirect triggers
+      document.getElementById('waOrderBtn').href = `https://wa.me/923219559580?text=${waMessage}`;
+      document.getElementById('igOrderBtn').href = `https://instagram.com/cozyloops.pk`;
+
+      sheetBackdrop.classList.add('is-active');
+      detailSheet.classList.add('is-active');
+    }
+
+    function closeSheet() {
+      sheetBackdrop.classList.remove('is-active');
+      detailSheet.classList.remove('is-active');
+    }
+
+    // ✨ Thought Bubble Handler
+    let bubbleTimeout;
+    function toggleThought() {
+      const bubble = document.getElementById('thoughtBubble');
+      
+      if (bubble.classList.contains('is-active')) {
+        bubble.classList.remove('is-active');
+      } else {
+        const randomIndex = Math.floor(Math.random() * thoughts.length);
+        bubble.innerText = thoughts[randomIndex];
+        bubble.classList.add('is-active');
+        
+        // Auto-close bubble after 5 seconds to keep the screen tidy
+        clearTimeout(bubbleTimeout);
+        bubbleTimeout = setTimeout(() => {
+          bubble.classList.remove('is-active');
+        }, 5000);
+      }
+    }
+
+    function openThought() {
+      const bubble = document.getElementById('thoughtBubble');
+      const randomIndex = Math.floor(Math.random() * thoughts.length);
+      bubble.innerText = thoughts[randomIndex];
+      bubble.classList.add('is-active');
+    }
+
+    // 🌊 Scroll Animation Triggers
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const hero = document.getElementById('hero');
+      const navbar = document.getElementById('mainNavbar');
+      
+      if (scrolled < window.innerHeight) {
+        hero.style.transform = `scale(${1 - (scrolled * 0.0003)})`;
+      }
+
+      if (scrolled > 50) {
+        navbar.style.padding = '8px 20px';
+        navbar.style.background = 'rgba(193, 225, 220, 0.85)'; // Morph to Spa Retreat with transparency
+      } else {
+        navbar.style.padding = '10px 24px';
+        navbar.style.background = 'rgba(252, 249, 246, 0.75)';
+      }
+    });
+  </script>
+</body>
+</html>
