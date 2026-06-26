@@ -304,7 +304,8 @@
       background-color: var(--spa-retreat);
       border: var(--border-style);
       border-radius: var(--border-radius-md);
-      height: 200px;
+      width: 100%;
+      aspect-ratio: 1 / 1;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -317,6 +318,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
       user-select: none;
       transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
@@ -512,7 +514,7 @@
       color: var(--purple-jasper);
     }
 
-    /* Modal Gallery Styles updated for Images */
+     /* Modal Gallery Styles updated for Images */
     .sheet-gallery {
       background-color: var(--lime-cream);
       border: var(--border-style);
@@ -750,7 +752,7 @@
   {
     id: "daisy-ring",
     name: "Daisy Flower Ring",
-    image: "diasy-rin.jpg", // Added /public
+    image: "diasy-rin.jpg", 
     badges: ["🤏 Pocket Sized", "✨ Made To Order", "🌸 Cute Alert"],
     price: 250,
     time: "1–2 Days",
@@ -759,7 +761,7 @@
   {
     id: "chonky-duck",
     name: "Chonky Duck Companion",
-    image: "chonky-duckie.jpg", // Added /public
+    image: "chonky-duckie.jpg", 
     badges: ["💖 Fan Favorite", "🧶 Handmade", "🐥 Certified Adorable"],
     price: 450,
     time: "2–3 Days",
@@ -768,7 +770,7 @@
   {
     id: "angry-pin",
     name: "Angy Pin",
-    image: "angy-pin.jpeg", // Added /public
+    image: "angy-pin.jpeg", 
     badges: ["🎀 Kaleshi Expression", "✨ Premium Soft", "🛍️ Best Seller"],
     price: 300,
     time: "1–2 Days",
@@ -777,16 +779,16 @@
   {
     id: "strawberry-charm",
     name: "Strawberry Bag Charm",
-    image: "strobery-charm.webp", // Added /public
-    badges: ["🌸 Tiny Treasure", "🧶 Freshly Crafted"],
-    price: 450,
+    image: "strobery-charm.jpg", 
+    badges: ["🌸 Tiny Treasure", "🧶 Freshly Crafted", "👜 Bag Charm  "],
+    price: 550,
     time: "2 Days",
     desc: "A plump, sweet, bright strawberry ready to dangle from your everyday canvas tote bag."
   },
   {
     id: "awk-drop-pin",
     name: "Water Droplet Pin",
-    image: "awk-drop-pin.jpg", // Added /public
+    image: "awk-drop-pin.jpg", 
     badges: ["🎀 Kaleshi Expression", "✨ Premium Soft", "Meme Material"],
     price: 300,
     time: "2 Days",
@@ -795,7 +797,7 @@
   {
     id: "pin combo",
     name: "Expressive Combo",
-    image: "Combo Pins.avif", // Added /public
+    image: "Combo Pins.avif", 
     badges: ["🎀 Kaleshi Expression", "Meme Material", "🎁 Combo Deal"],
     price: 520,
     time: "3 Days",
@@ -806,7 +808,7 @@
     name: "The Put A Bow On It Charm",
     image: "pink-bow.jpg", 
     badges: ["✊ Versatile Queen", "💝 Soft Girl Aesthetic", "✨ Multi-use"],
-    price: 250,
+    price: 300,
     time: "2 Days",
     desc: "Because everything looks 10x better with a pink bow on it. Expertly crocheted to give your keys, bags, or hair a heavy dose of main-character energy."
   }
